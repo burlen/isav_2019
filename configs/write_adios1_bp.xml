@@ -1,0 +1,16 @@
+<sensei>
+
+  <analysis type="adios1" filename="data.bp" method="MPI" enabled="1">
+    <mesh name="mesh">
+        <cell_arrays> data </cell_arrays>
+    </mesh>
+  </analysis>
+
+
+  <analysis type="PosthocIO" mode="paraview" output_dir="./data" enabled="0">
+    <mesh name="mesh">
+        <cell_arrays> data </cell_arrays>
+    </mesh>
+  </analysis>
+
+</sensei>
