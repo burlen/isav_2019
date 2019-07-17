@@ -43,11 +43,12 @@ else
   exit -1
 fi
 
-R=`echo ${M}/32 | bc`
+RM=`echo ${M}/32 | bc`
+RN=`echo ${N}/32 | bc`
 
 D=`date +%Y_%j_%H_%M`
 
-echo "O=${O} T=${T} L=${L} M=${M} N=${N} R=${R} S=${S} D=${D}"
+echo "O=${O} T=${T} L=${L} M=${M} N=${N} RM=${RM} RN=${RN} S=${S} D=${D}"
 
 bld=`echo -e '\e[1m'`
 red=`echo -e '\e[31m'`
@@ -70,7 +71,7 @@ export MEMPROF_LOG_FILE=./logs/osc_iso_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
 
 cat ./configs/write_adios1_flexpath.xml | sed "s/.*/$blu&$wht/"
 
-srun -N 1 -n ${M} -r 0 oscillator -t ${T} -s ${L},${L},${L} -e 0,1,0,1,0,1 \
+srun -N ${RM} -n ${M} -r 0 oscillator -t ${T} -s ${L},${L},${L} -e 0,1,0,1,0,1 \
   -b ${M} -f ./configs/write_adios1_flexpath.xml -g 1 -p 0  \
   ./inputs/conf.osc 2>&1 | sed "s/.*/$red&$wht/" &
 
@@ -82,6 +83,6 @@ export MEMPROF_LOG_FILE=./logs/aep_iso_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
 
 cat ${S} | sed "s/.*/$blu&$wht/"
 
-srun -N 1 -n ${N} -r ${R} ADIOS1EndPoint -r FLEXPATH \
+srun -N ${RN} -n ${N} -r ${RM} ADIOS1EndPoint -r FLEXPATH \
   -f ${S} data.bp 2>&1 | sed "s/.*/$grn&$wht/"
 

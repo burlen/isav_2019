@@ -34,10 +34,10 @@ fi
 S=
 if [[ "${O}" == "0" ]]
 then
-  S=./configs/slice_extract.xml
+  S=./configs/slice_extract_knl.xml
 elif [[ "${O}" == "1" ]]
 then
-  S=./configs/slice_extract_opt.xml
+  S=./configs/slice_extract_opt_knl.xml
 else
   echo "ERROR; O=${O} must be 0 or 1"
   exit -1
@@ -57,6 +57,7 @@ blu=`echo -e '\e[36m'`
 wht=`echo -e '\e[0m'`
 
 rm -rf ./slices/*
+rm data_knl.bp*
 
 module use /usr/common/software/sensei/modulefiles
 module load sensei/3.0.0-vtk-shared
@@ -66,8 +67,8 @@ set -x
 export TIMER_ENABLE=1
 export MEMPROF_INTERVAL=0.5
 
-export TIMER_LOG_FILE=./logs/osc_slice_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
-export MEMPROF_LOG_FILE=./logs/osc_slice_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
+export TIMER_LOG_FILE=./logs/osc_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
+export MEMPROF_LOG_FILE=./logs/osc_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
 
 cat ./configs/write_adios1_flexpath.xml | sed "s/.*/$blu&$wht/"
 
@@ -78,11 +79,11 @@ srun -N ${RM} -n ${M} -r 0 oscillator -t ${T} -s ${L},${L},${L} -e 0,1,0,1,0,1 \
 
 
 
-export TIMER_LOG_FILE=./logs/aep_slice_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
-export MEMPROF_LOG_FILE=./logs/aep_slice_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
+export TIMER_LOG_FILE=./logs/aep_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
+export MEMPROF_LOG_FILE=./logs/aep_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
 
 cat ${S} | sed "s/.*/$blu&$wht/"
 
 srun -N ${RN} -n ${N} -r ${RM} ADIOS1EndPoint -r FLEXPATH \
-  -f ${S} data.bp 2>&1 | sed "s/.*/$grn&$wht/"
+  -f ${S} data_knl.bp 2>&1 | sed "s/.*/$grn&$wht/"
 

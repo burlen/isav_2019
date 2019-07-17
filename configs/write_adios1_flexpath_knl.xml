@@ -1,0 +1,7 @@
+<sensei>
+  <analysis type="adios1" filename="data_knl.bp" method="FLEXPATH" enabled="1" >
+    <mesh name="mesh">
+        <cell_arrays> data </cell_arrays>
+    </mesh>
+  </analysis>
+</sensei>
