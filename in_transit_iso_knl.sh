@@ -78,6 +78,7 @@ srun -N ${RM} -n ${M} -r 0 oscillator -t ${T} -s ${L},${L},${L} -e 0,1,0,1,0,1 \
 
 # wait for the job to start
 delay=300
+set +x
 while [[ True ]]
 do
   if [[ -e "data_knl.bp_writer_info.txt" ]]
@@ -93,7 +94,9 @@ do
     let delay=${delay}-1
   fi
 done
-echo
+let delay=300-${delay}
+echo "found at ${delay}s"
+set -x
 
 export TIMER_LOG_FILE=./logs/aep_iso_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
 export MEMPROF_LOG_FILE=./logs/aep_iso_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
