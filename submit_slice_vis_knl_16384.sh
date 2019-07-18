@@ -13,7 +13,7 @@ set -x
 echo "============================================="
 echo "PlanarSlicePartitioner                       "
 echo "============================================="
-O=1 T=1 L=4096 M=16384 N=16384 ./in_transit_slice_vis_knl.sh
+O=1 T=1 L=4096 M=16384 N=2048 ./in_transit_slice_vis_knl.sh
 echo "============================================="
 
 echo "Job completed!"

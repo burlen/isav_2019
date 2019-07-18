@@ -13,7 +13,7 @@ set -x
 echo "============================================="
 echo "IsoSurfacePartitioner                        "
 echo "============================================="
-O=1 T=1 L=4096 M=16384 N=2048 ./in_transit_iso_knl.sh
+O=1 T=1 L=4096 M=16384 N=2048 ./in_transit_iso_vis_knl.sh
 echo "============================================="
 
 echo "Job completed!"

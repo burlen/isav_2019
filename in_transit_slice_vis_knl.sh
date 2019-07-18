@@ -36,7 +36,7 @@ S=
 #  S=./configs/slice_extract_knl.xml
 if [[ "${O}" == "1" ]]
 then
-  S=./configs/slice_extract_opt_knl.xml
+  S=./configs/slice_extract_opt_vis_knl.xml
 else
   echo "ERROR; O=${O} must be 0 or 1"
   exit -1
