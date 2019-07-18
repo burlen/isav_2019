@@ -1,0 +1,95 @@
++ echo =============================================
+=============================================
++ echo 'PlanarSlicePartitioner                       '
+PlanarSlicePartitioner                       
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=16384
++ N=2048
++ ./in_transit_slice_vis_knl.sh
+O=1 T=1 L=4096 M=16384 N=2048 RM= RN=31 S=./configs/slice_extract_opt_vis_knl.xml D=2019_199_15_56
+rm: cannot remove 'data_slice_vis_knl.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_knl/23159988_osc_slice_knl_o1_t1_l4096_m16384_n2048_2019_199_15_56.time
++ TIMER_LOG_FILE=./logs_knl/23159988_osc_slice_knl_o1_t1_l4096_m16384_n2048_2019_199_15_56.time
++ export MEMPROF_LOG_FILE=./logs_knl/23159988_osc_slice_knl_o1_t1_l4096_m16384_n2048_2019_199_15_56.mem
++ MEMPROF_LOG_FILE=./logs_knl/23159988_osc_slice_knl_o1_t1_l4096_m16384_n2048_2019_199_15_56.mem
++ cat ./configs/write_adios1_flexpath_slice_vis_knl.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_vis_knl.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 241 -n 16384 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 16384 -f ./configs/write_adios1_flexpath_slice_vis_knl.xml -g 1 -p 0 ./inputs/conf.osc
++ sed 's/.*/[31m&[0m/'
++ delay=300
++ set +x
+.......................................................................................................................................................found at 151s
++ export TIMER_LOG_FILE=./logs_knl/23159988_aep_slice_knl_o1_t1_l4096_m16384_n2048_2019_199_15_56.time
++ TIMER_LOG_FILE=./logs_knl/23159988_aep_slice_knl_o1_t1_l4096_m16384_n2048_2019_199_15_56.time
++ export MEMPROF_LOG_FILE=./logs_knl/23159988_aep_slice_knl_o1_t1_l4096_m16384_n2048_2019_199_15_56.mem
++ MEMPROF_LOG_FILE=./logs_knl/23159988_aep_slice_knl_o1_t1_l4096_m16384_n2048_2019_199_15_56.mem
++ cat ./configs/slice_extract_opt_vis_knl.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="1"  verbose="2" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_vis_knl" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 31 -n 2048 -r 241 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_opt_vis_knl.xml data_slice_vis_knl.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_vis_knl.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 1251.890 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_vis_knl.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_opt_vis_knl.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_vis_knl writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=1 verbose=2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/PlanarSlicePartitioner.cxx:160][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: 0PlanarSlicePartitioner: NumBlocks=16384 NumActiveBlocks=1278 numCellsMoved=5572335600 numCellsLeft=65865181200 movedFraction=0.0780029[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ echo 'Job completed!'
+Job completed!
