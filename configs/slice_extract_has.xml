@@ -1,11 +1,11 @@
 <sensei>
   <analysis type="SliceExtract" operation="planar_slice"
-    enable_partitioner="1"  verbose="1" enabled="1">
+    enable_partitioner="0"  verbose="1" enabled="1">
     <mesh name="mesh">
       <cell_arrays> data </cell_arrays>
     </mesh>
     <point> 0.5 0.5 0.5 </point>
     <normal> 0.8 -0.5 0.3 </normal>
-    <writer mode="paraview" output_dir="./slices" />
+    <writer mode="paraview" output_dir="./slices_has" />
   </analysis>
 </sensei>

@@ -33,21 +33,21 @@ fi
 S=
 if [[ "${O}" == "0" ]]
 then
-  S=./configs/slice_extract_knl.xml
+  S=./configs/iso_extract_has.xml
 elif [[ "${O}" == "1" ]]
 then
-  S=./configs/slice_extract_opt_knl.xml
+  S=./configs/iso_extract_opt_has.xml
 else
   echo "ERROR; O=${O} must be 0 or 1"
   exit -1
 fi
 
-RM=`echo "${M}/68 + 1" | bc`
-RN=`echo "${N}/68 + 1" | bc`
+RM=`echo "${M}/32 + 1" | bc`
+RN=`echo "${N}/32 + 1" | bc`
 
 D=`date +%Y_%j_%H_%M`
 
-echo "O=${O} T=${T} L=${L} M=${M} N=${N} RM=${MR} RN=${RN} S=${S} D=${D}"
+echo "O=${O} T=${T} L=${L} M=${M} N=${N} RM=${RM} RN=${RN} S=${S} D=${D}"
 
 bld=`echo -e '\e[1m'`
 red=`echo -e '\e[31m'`
@@ -55,8 +55,8 @@ grn=`echo -e '\e[32m'`
 blu=`echo -e '\e[36m'`
 wht=`echo -e '\e[0m'`
 
-rm -rf ./slices_knl/*
-rm data_slice_knl.bp*
+rm -rf ./isos_has/*
+rm data_iso_has.bp*
 
 module use /usr/common/software/sensei/modulefiles
 module load sensei/3.0.0-vtk-shared
@@ -66,22 +66,21 @@ set -x
 export TIMER_ENABLE=0
 export MEMPROF_INTERVAL=0.5
 
-export TIMER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_osc_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
-export MEMPROF_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_osc_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
+export TIMER_LOG_FILE=./logs_has/${SLURM_JOB_ID}_osc_iso_has_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
+export MEMPROF_LOG_FILE=./logs_has/${SLURM_JOB_ID}_osc_iso_has_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
 
-cat ./configs/write_adios1_flexpath_slice_knl.xml | sed "s/.*/$blu&$wht/"
+cat ./configs/write_adios1_flexpath_iso_has.xml | sed "s/.*/$blu&$wht/"
 
 srun -N ${RM} -n ${M} -r 0 oscillator -t ${T} -s ${L},${L},${L} -e 0,1,0,1,0,1 \
-  -b ${M} -f ./configs/write_adios1_flexpath_slice_knl.xml -g 1 -p 0  \
+  -b ${M} -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0  \
   ./inputs/conf.osc 2>&1 | sed "s/.*/$red&$wht/" &
-
 
 # wait for the job to start
 delay=300
 set +x
 while [[ True ]]
 do
-  if [[ -e "data_slice_knl.bp_writer_info.txt" ]]
+  if [[ -e "data_iso_has.bp_writer_info.txt" ]]
   then
     break
   elif [[ ${delay} -le 0 ]]
@@ -98,12 +97,11 @@ let delay=300-${delay}
 echo "found at ${delay}s"
 set -x
 
-
-export TIMER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_aep_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
-export MEMPROF_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_aep_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
+export TIMER_LOG_FILE=./logs_has/${SLURM_JOB_ID}_aep_iso_has_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
+export MEMPROF_LOG_FILE=./logs_has/${SLURM_JOB_ID}_aep_iso_has_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
 
 cat ${S} | sed "s/.*/$blu&$wht/"
 
 srun -N ${RN} -n ${N} -r ${RM} ADIOS1EndPoint -r FLEXPATH \
-  -f ${S} data_slice_knl.bp 2>&1 | sed "s/.*/$grn&$wht/"
+  -f ${S} data_iso_has.bp 2>&1 | sed "s/.*/$grn&$wht/"
 

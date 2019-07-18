@@ -30,7 +30,6 @@ then
   exit -1
 fi
 
-
 S=
 if [[ "${O}" == "0" ]]
 then
@@ -57,23 +56,23 @@ blu=`echo -e '\e[36m'`
 wht=`echo -e '\e[0m'`
 
 rm -rf ./isos_knl/*
-rm data_knl.bp*
+rm data_iso_knl.bp*
 
 module use /usr/common/software/sensei/modulefiles
 module load sensei/3.0.0-vtk-shared
 
 set -x
 
-export TIMER_ENABLE=1
+export TIMER_ENABLE=0
 export MEMPROF_INTERVAL=0.5
 
-export TIMER_LOG_FILE=./logs/osc_iso_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
-export MEMPROF_LOG_FILE=./logs/osc_iso_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
+export TIMER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_osc_iso_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
+export MEMPROF_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_osc_iso_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
 
-cat ./configs/write_adios1_flexpath_knl.xml | sed "s/.*/$blu&$wht/"
+cat ./configs/write_adios1_flexpath_iso_knl.xml | sed "s/.*/$blu&$wht/"
 
 srun -N ${RM} -n ${M} -r 0 oscillator -t ${T} -s ${L},${L},${L} -e 0,1,0,1,0,1 \
-  -b ${M} -f ./configs/write_adios1_flexpath_knl.xml -g 1 -p 0  \
+  -b ${M} -f ./configs/write_adios1_flexpath_iso_knl.xml -g 1 -p 0  \
   ./inputs/conf.osc 2>&1 | sed "s/.*/$red&$wht/" &
 
 # wait for the job to start
@@ -81,7 +80,7 @@ delay=300
 set +x
 while [[ True ]]
 do
-  if [[ -e "data_knl.bp_writer_info.txt" ]]
+  if [[ -e "data_iso_knl.bp_writer_info.txt" ]]
   then
     break
   elif [[ ${delay} -le 0 ]]
@@ -98,11 +97,11 @@ let delay=300-${delay}
 echo "found at ${delay}s"
 set -x
 
-export TIMER_LOG_FILE=./logs/aep_iso_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
-export MEMPROF_LOG_FILE=./logs/aep_iso_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
+export TIMER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_aep_iso_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
+export MEMPROF_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_aep_iso_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
 
 cat ${S} | sed "s/.*/$blu&$wht/"
 
 srun -N ${RN} -n ${N} -r ${RM} ADIOS1EndPoint -r FLEXPATH \
-  -f ${S} data_knl.bp 2>&1 | sed "s/.*/$grn&$wht/"
+  -f ${S} data_iso_knl.bp 2>&1 | sed "s/.*/$grn&$wht/"
 
