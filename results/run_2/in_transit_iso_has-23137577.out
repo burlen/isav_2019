@@ -1,0 +1,1409 @@
++ echo =============================================
+=============================================
++ echo 'IsoSurfacePartitioner                        '
+IsoSurfacePartitioner                        
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=8192
++ ./in_transit_iso_has.sh
+O=1 T=1 L=4096 M=8192 N=8192 RM=257 RN=257 S=./configs/iso_extract_opt_has.xml D=2019_198_21_51
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n8192_2019_198_21_51.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n8192_2019_198_21_51.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n8192_2019_198_21_51.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n8192_2019_198_21_51.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+.................................................................found at 65s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n8192_2019_198_21_51.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n8192_2019_198_21_51.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n8192_2019_198_21_51.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n8192_2019_198_21_51.mem
++ cat ./configs/iso_extract_opt_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="1" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_opt_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n8192_2019_198_21_51.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n8192_2019_198_21_51.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=0 numCellsMoved=0 numCellsLeft=70887997440 movedFraction=0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=1975 numCellsMoved=17090307000 numCellsLeft=53797690440 movedFraction=0.241089[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2019 numCellsMoved=17471053080 numCellsLeft=53416944360 movedFraction=0.24646[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2018 numCellsMoved=17462399760 numCellsLeft=53425597680 movedFraction=0.246338[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2014 numCellsMoved=17427786480 numCellsLeft=53460210960 movedFraction=0.24585[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2038 numCellsMoved=17635466160 numCellsLeft=53252531280 movedFraction=0.248779[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2135 numCellsMoved=18474838200 numCellsLeft=52413159240 movedFraction=0.26062[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2010 numCellsMoved=17393173200 numCellsLeft=53494824240 movedFraction=0.245361[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2177 numCellsMoved=18838277640 numCellsLeft=52049719800 movedFraction=0.265747[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2187 numCellsMoved=18924810840 numCellsLeft=51963186600 movedFraction=0.266968[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n8192_2019_198_21_51.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n8192_2019_198_21_51.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 434.41 s[0m
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=4096
++ ./in_transit_iso_has.sh
+O=1 T=1 L=4096 M=8192 N=4096 RM=257 RN=129 S=./configs/iso_extract_opt_has.xml D=2019_198_21_59
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n4096_2019_198_21_59.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n4096_2019_198_21_59.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n4096_2019_198_21_59.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n4096_2019_198_21_59.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ delay=300
++ set +x
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
+.+ sed 's/.*/[31m&[0m/'
+.................................................................found at 66s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n4096_2019_198_21_59.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n4096_2019_198_21_59.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n4096_2019_198_21_59.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n4096_2019_198_21_59.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/iso_extract_opt_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="1" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 129 -n 4096 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_opt_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n4096_2019_198_21_59.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n4096_2019_198_21_59.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=0 numCellsMoved=0 numCellsLeft=70887997440 movedFraction=0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=1975 numCellsMoved=17090307000 numCellsLeft=53797690440 movedFraction=0.241089[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2019 numCellsMoved=17471053080 numCellsLeft=53416944360 movedFraction=0.24646[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2018 numCellsMoved=17462399760 numCellsLeft=53425597680 movedFraction=0.246338[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2014 numCellsMoved=17427786480 numCellsLeft=53460210960 movedFraction=0.24585[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2038 numCellsMoved=17635466160 numCellsLeft=53252531280 movedFraction=0.248779[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2135 numCellsMoved=18474838200 numCellsLeft=52413159240 movedFraction=0.26062[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2010 numCellsMoved=17393173200 numCellsLeft=53494824240 movedFraction=0.245361[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2177 numCellsMoved=18838277640 numCellsLeft=52049719800 movedFraction=0.265747[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2187 numCellsMoved=18924810840 numCellsLeft=51963186600 movedFraction=0.266968[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=2048
++ ./in_transit_iso_has.sh
+O=1 T=1 L=4096 M=8192 N=2048 RM=257 RN=65 S=./configs/iso_extract_opt_has.xml D=2019_198_22_06
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n4096_2019_198_21_59.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n4096_2019_198_21_59.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 427.555 s[0m
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n2048_2019_198_22_06.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n2048_2019_198_22_06.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n2048_2019_198_22_06.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n2048_2019_198_22_06.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+......................................................................found at 70s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n2048_2019_198_22_06.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n2048_2019_198_22_06.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n2048_2019_198_22_06.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n2048_2019_198_22_06.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/iso_extract_opt_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="1" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 65 -n 2048 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_opt_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n2048_2019_198_22_06.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n2048_2019_198_22_06.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=0 numCellsMoved=0 numCellsLeft=70887997440 movedFraction=0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=1975 numCellsMoved=17090307000 numCellsLeft=53797690440 movedFraction=0.241089[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2019 numCellsMoved=17471053080 numCellsLeft=53416944360 movedFraction=0.24646[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2018 numCellsMoved=17462399760 numCellsLeft=53425597680 movedFraction=0.246338[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2014 numCellsMoved=17427786480 numCellsLeft=53460210960 movedFraction=0.24585[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2038 numCellsMoved=17635466160 numCellsLeft=53252531280 movedFraction=0.248779[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2135 numCellsMoved=18474838200 numCellsLeft=52413159240 movedFraction=0.26062[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2010 numCellsMoved=17393173200 numCellsLeft=53494824240 movedFraction=0.245361[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2177 numCellsMoved=18838277640 numCellsLeft=52049719800 movedFraction=0.265747[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2187 numCellsMoved=18924810840 numCellsLeft=51963186600 movedFraction=0.266968[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=1024
++ ./in_transit_iso_has.sh
+O=1 T=1 L=4096 M=8192 N=1024 RM=257 RN=33 S=./configs/iso_extract_opt_has.xml D=2019_198_22_14
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n2048_2019_198_22_06.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n2048_2019_198_22_06.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 415.364 s[0m
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n1024_2019_198_22_14.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n1024_2019_198_22_14.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n1024_2019_198_22_14.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n1024_2019_198_22_14.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+..........................................................................found at 74s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n1024_2019_198_22_14.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n1024_2019_198_22_14.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n1024_2019_198_22_14.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n1024_2019_198_22_14.mem
++ cat ./configs/iso_extract_opt_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="1" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ sed 's/.*/[32m&[0m/'
++ srun -N 33 -n 1024 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_opt_has.xml data_iso_has.bp
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n1024_2019_198_22_14.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n1024_2019_198_22_14.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=0 numCellsMoved=0 numCellsLeft=70887997440 movedFraction=0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=1975 numCellsMoved=17090307000 numCellsLeft=53797690440 movedFraction=0.241089[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2019 numCellsMoved=17471053080 numCellsLeft=53416944360 movedFraction=0.24646[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2018 numCellsMoved=17462399760 numCellsLeft=53425597680 movedFraction=0.246338[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2014 numCellsMoved=17427786480 numCellsLeft=53460210960 movedFraction=0.24585[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2038 numCellsMoved=17635466160 numCellsLeft=53252531280 movedFraction=0.248779[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2135 numCellsMoved=18474838200 numCellsLeft=52413159240 movedFraction=0.26062[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2010 numCellsMoved=17393173200 numCellsLeft=53494824240 movedFraction=0.245361[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2177 numCellsMoved=18838277640 numCellsLeft=52049719800 movedFraction=0.265747[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2187 numCellsMoved=18924810840 numCellsLeft=51963186600 movedFraction=0.266968[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=512
++ ./in_transit_iso_has.sh
+O=1 T=1 L=4096 M=8192 N=512 RM=257 RN=17 S=./configs/iso_extract_opt_has.xml D=2019_198_22_21
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n1024_2019_198_22_14.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n1024_2019_198_22_14.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 409.525 s[0m
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n512_2019_198_22_21.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n512_2019_198_22_21.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n512_2019_198_22_21.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n512_2019_198_22_21.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+..........................................................................found at 74s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n512_2019_198_22_21.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n512_2019_198_22_21.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n512_2019_198_22_21.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n512_2019_198_22_21.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/iso_extract_opt_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="1" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 17 -n 512 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_opt_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n512_2019_198_22_21.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n512_2019_198_22_21.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=0 numCellsMoved=0 numCellsLeft=70887997440 movedFraction=0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=1975 numCellsMoved=17090307000 numCellsLeft=53797690440 movedFraction=0.241089[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2019 numCellsMoved=17471053080 numCellsLeft=53416944360 movedFraction=0.24646[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2018 numCellsMoved=17462399760 numCellsLeft=53425597680 movedFraction=0.246338[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2014 numCellsMoved=17427786480 numCellsLeft=53460210960 movedFraction=0.24585[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2038 numCellsMoved=17635466160 numCellsLeft=53252531280 movedFraction=0.248779[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2135 numCellsMoved=18474838200 numCellsLeft=52413159240 movedFraction=0.26062[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2010 numCellsMoved=17393173200 numCellsLeft=53494824240 movedFraction=0.245361[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2177 numCellsMoved=18838277640 numCellsLeft=52049719800 movedFraction=0.265747[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2187 numCellsMoved=18924810840 numCellsLeft=51963186600 movedFraction=0.266968[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=256
++ ./in_transit_iso_has.sh
+O=1 T=1 L=4096 M=8192 N=256 RM=257 RN=9 S=./configs/iso_extract_opt_has.xml D=2019_198_22_29
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n512_2019_198_22_21.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n512_2019_198_22_21.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 423.105 s[0m
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n256_2019_198_22_29.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n256_2019_198_22_29.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n256_2019_198_22_29.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n256_2019_198_22_29.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+..............................................................................found at 78s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n256_2019_198_22_29.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n256_2019_198_22_29.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n256_2019_198_22_29.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n256_2019_198_22_29.mem
++ cat ./configs/iso_extract_opt_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="1" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 9 -n 256 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_opt_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n256_2019_198_22_29.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n256_2019_198_22_29.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=0 numCellsMoved=0 numCellsLeft=70887997440 movedFraction=0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=1975 numCellsMoved=17090307000 numCellsLeft=53797690440 movedFraction=0.241089[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2019 numCellsMoved=17471053080 numCellsLeft=53416944360 movedFraction=0.24646[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2018 numCellsMoved=17462399760 numCellsLeft=53425597680 movedFraction=0.246338[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2014 numCellsMoved=17427786480 numCellsLeft=53460210960 movedFraction=0.24585[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2038 numCellsMoved=17635466160 numCellsLeft=53252531280 movedFraction=0.248779[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2135 numCellsMoved=18474838200 numCellsLeft=52413159240 movedFraction=0.26062[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2010 numCellsMoved=17393173200 numCellsLeft=53494824240 movedFraction=0.245361[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2177 numCellsMoved=18838277640 numCellsLeft=52049719800 movedFraction=0.265747[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2187 numCellsMoved=18924810840 numCellsLeft=51963186600 movedFraction=0.266968[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=128
++ ./in_transit_iso_has.sh
+O=1 T=1 L=4096 M=8192 N=128 RM=257 RN=5 S=./configs/iso_extract_opt_has.xml D=2019_198_22_37
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n256_2019_198_22_29.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n256_2019_198_22_29.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 434.193 s[0m
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n128_2019_198_22_37.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n128_2019_198_22_37.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n128_2019_198_22_37.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n128_2019_198_22_37.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ delay=300
++ set +x
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
+.+ sed 's/.*/[31m&[0m/'
+........................................................................found at 73s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n128_2019_198_22_37.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n128_2019_198_22_37.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n128_2019_198_22_37.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n128_2019_198_22_37.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/iso_extract_opt_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="1" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 5 -n 128 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_opt_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n128_2019_198_22_37.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o1_t1_l4096_m8192_n128_2019_198_22_37.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=0 numCellsMoved=0 numCellsLeft=70887997440 movedFraction=0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=1975 numCellsMoved=17090307000 numCellsLeft=53797690440 movedFraction=0.241089[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2019 numCellsMoved=17471053080 numCellsLeft=53416944360 movedFraction=0.24646[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2018 numCellsMoved=17462399760 numCellsLeft=53425597680 movedFraction=0.246338[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2014 numCellsMoved=17427786480 numCellsLeft=53460210960 movedFraction=0.24585[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2038 numCellsMoved=17635466160 numCellsLeft=53252531280 movedFraction=0.248779[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2135 numCellsMoved=18474838200 numCellsLeft=52413159240 movedFraction=0.26062[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2010 numCellsMoved=17393173200 numCellsLeft=53494824240 movedFraction=0.245361[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2177 numCellsMoved=18838277640 numCellsLeft=52049719800 movedFraction=0.265747[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/IsoSurfacePartitioner.cxx:171][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: IsoSurfacePartitioner: NumBlocks=8192 NumActiveBlocks=2187 numCellsMoved=18924810840 numCellsLeft=51963186600 movedFraction=0.266968[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ echo '#############################################'
+#############################################
++ echo =============================================
+=============================================
++ echo 'BlockPartitioner                             '
+BlockPartitioner                             
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=8192
++ ./in_transit_iso_has.sh
+O=0 T=1 L=4096 M=8192 N=8192 RM=257 RN=257 S=./configs/iso_extract_has.xml D=2019_198_22_45
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n128_2019_198_22_37.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o1_t1_l4096_m8192_n128_2019_198_22_37.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 471.644 s[0m
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n8192_2019_198_22_45.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n8192_2019_198_22_45.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n8192_2019_198_22_45.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n8192_2019_198_22_45.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+............................................................................found at 76s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n8192_2019_198_22_45.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n8192_2019_198_22_45.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n8192_2019_198_22_45.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n8192_2019_198_22_45.mem
++ cat ./configs/iso_extract_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="0" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n8192_2019_198_22_45.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n8192_2019_198_22_45.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 430.850 s[0m
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n8192_2019_198_22_45.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n8192_2019_198_22_45.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=4096
++ ./in_transit_iso_has.sh
+O=0 T=1 L=4096 M=8192 N=4096 RM=257 RN=129 S=./configs/iso_extract_has.xml D=2019_198_22_53
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n4096_2019_198_22_53.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n4096_2019_198_22_53.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n4096_2019_198_22_53.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n4096_2019_198_22_53.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
++ sed 's/.*/[31m&[0m/'
++ delay=300
++ set +x
+................................................................found at 64s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n4096_2019_198_22_53.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n4096_2019_198_22_53.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n4096_2019_198_22_53.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n4096_2019_198_22_53.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/iso_extract_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="0" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 129 -n 4096 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n4096_2019_198_22_53.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n4096_2019_198_22_53.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=2048
++ ./in_transit_iso_has.sh
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n4096_2019_198_22_53.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n4096_2019_198_22_53.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 430.687 s[0m
+O=0 T=1 L=4096 M=8192 N=2048 RM=257 RN=65 S=./configs/iso_extract_has.xml D=2019_198_23_02
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n2048_2019_198_23_02.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n2048_2019_198_23_02.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n2048_2019_198_23_02.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n2048_2019_198_23_02.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ sed 's/.*/[31m&[0m/'
++ set +x
+...............................................................found at 63s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n2048_2019_198_23_02.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n2048_2019_198_23_02.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n2048_2019_198_23_02.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n2048_2019_198_23_02.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/iso_extract_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="0" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 65 -n 2048 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n2048_2019_198_23_02.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n2048_2019_198_23_02.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=1024
++ ./in_transit_iso_has.sh
+O=0 T=1 L=4096 M=8192 N=1024 RM=257 RN=33 S=./configs/iso_extract_has.xml D=2019_198_23_11
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n2048_2019_198_23_02.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n2048_2019_198_23_02.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 424.735 s[0m
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n1024_2019_198_23_11.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n1024_2019_198_23_11.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n1024_2019_198_23_11.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n1024_2019_198_23_11.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ sed 's/.*/[31m&[0m/'
++ set +x
+.............................................................found at 61s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n1024_2019_198_23_11.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n1024_2019_198_23_11.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n1024_2019_198_23_11.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n1024_2019_198_23_11.mem
++ cat ./configs/iso_extract_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="0" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 33 -n 1024 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n1024_2019_198_23_11.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n1024_2019_198_23_11.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=512
++ ./in_transit_iso_has.sh
+O=0 T=1 L=4096 M=8192 N=512 RM=257 RN=17 S=./configs/iso_extract_has.xml D=2019_198_23_19
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n1024_2019_198_23_11.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n1024_2019_198_23_11.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 427.707 s[0m
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n512_2019_198_23_19.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n512_2019_198_23_19.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n512_2019_198_23_19.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n512_2019_198_23_19.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
++ sed 's/.*/[31m&[0m/'
++ delay=300
++ set +x
+...............................................................found at 63s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n512_2019_198_23_19.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n512_2019_198_23_19.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n512_2019_198_23_19.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n512_2019_198_23_19.mem
++ cat ./configs/iso_extract_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="0" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 17 -n 512 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n512_2019_198_23_19.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n512_2019_198_23_19.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=256
++ ./in_transit_iso_has.sh
+O=0 T=1 L=4096 M=8192 N=256 RM=257 RN=9 S=./configs/iso_extract_has.xml D=2019_198_23_30
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n512_2019_198_23_19.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n512_2019_198_23_19.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 550.482 s[0m
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n256_2019_198_23_30.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n256_2019_198_23_30.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n256_2019_198_23_30.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n256_2019_198_23_30.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
++ sed 's/.*/[31m&[0m/'
++ delay=300
++ set +x
+.............................................................................found at 77s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n256_2019_198_23_30.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n256_2019_198_23_30.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n256_2019_198_23_30.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n256_2019_198_23_30.mem
++ cat ./configs/iso_extract_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="0" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 9 -n 256 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n256_2019_198_23_30.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n256_2019_198_23_30.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=128
++ ./in_transit_iso_has.sh
+O=0 T=1 L=4096 M=8192 N=128 RM=257 RN=5 S=./configs/iso_extract_has.xml D=2019_198_23_47
+[31mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[31mtimer log file "./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n256_2019_198_23_30.time", memory profiler log file "./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n256_2019_198_23_30.mem", sampling interval 0.5 seconds[0m
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_iso_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 900.961 s[0m
+rm: cannot remove 'data_iso_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=1
++ TIMER_ENABLE=1
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n128_2019_198_23_47.time
++ TIMER_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n128_2019_198_23_47.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n128_2019_198_23_47.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_osc_iso_has_o0_t1_l4096_m8192_n128_2019_198_23_47.mem
++ cat ./configs/write_adios1_flexpath_iso_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_iso_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_iso_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ sed 's/.*/[31m&[0m/'
++ set +x
+.......................................................................found at 71s
++ export TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n128_2019_198_23_47.time
++ TIMER_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n128_2019_198_23_47.time
++ export MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n128_2019_198_23_47.mem
++ MEMPROF_LOG_FILE=./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n128_2019_198_23_47.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/iso_extract_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="iso_surface"[0m
+[36m    enable_partitioner="0" verbose="1" enabled="1">[0m
+[36m[0m
+[36m    <iso_values mesh_name="mesh" array_name="data"[0m
+[36m       array_centering="cell">[0m
+[36m       -0.25 1.25 3.25[0m
+[36m    </iso_values>[0m
+[36m[0m
+[36m    <writer mode="paraview" output_dir="./isos_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 5 -n 128 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/iso_extract_has.xml data_iso_has.bp
++ sed 's/.*/[32m&[0m/'
+[32mTimer configured with logging enabled, summarize events off, summary modulus 100000000, [0m
+[32mtimer log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n128_2019_198_23_47.time", memory profiler log file "./logs_has/23137577_aep_iso_has_o0_t1_l4096_m8192_n128_2019_198_23_47.mem", sampling interval 0.5 seconds[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_iso_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/iso_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./isos_has writer.writer=xml operation=iso_surface mesh_name=mesh array_name=data array_centering=cell iso_values={-0.25, 1.25, 3.25} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
