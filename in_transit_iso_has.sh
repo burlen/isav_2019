@@ -55,7 +55,8 @@ grn=`echo -e '\e[32m'`
 blu=`echo -e '\e[36m'`
 wht=`echo -e '\e[0m'`
 
-rm -rf ./isos_has/*
+#rm -rf ./isos_has/*
+find ./isos_has/ -exec rm {} \;
 rm data_iso_has.bp*
 
 module use /usr/common/software/sensei/modulefiles
@@ -63,8 +64,8 @@ module load sensei/3.0.0-vtk-shared
 
 set -x
 
-export TIMER_ENABLE=0
-export MEMPROF_INTERVAL=0.5
+export TIMER_ENABLE=1
+export MEMPROF_INTERVAL=2
 
 export TIMER_LOG_FILE=./logs_has/${SLURM_JOB_ID}_osc_iso_has_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
 export MEMPROF_LOG_FILE=./logs_has/${SLURM_JOB_ID}_osc_iso_has_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem

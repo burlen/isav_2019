@@ -55,7 +55,8 @@ grn=`echo -e '\e[32m'`
 blu=`echo -e '\e[36m'`
 wht=`echo -e '\e[0m'`
 
-rm -rf ./isos_knl/*
+#rm -rf ./isos_knl/*
+find ./isos_knl/ -exec rm {} \;
 rm data_iso_knl.bp*
 
 module use /usr/common/software/sensei/modulefiles
