@@ -2,7 +2,7 @@
 #SBATCH -N 243
 #SBATCH -C knl
 #SBATCH -t 04:00:00
-#SBATCH -q premium
+#SBATCH -q regular
 #SBATCH -A m3090
 #SBATCH -J in_transit_slice_knl
 #SBATCH -d singleton

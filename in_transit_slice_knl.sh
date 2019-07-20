@@ -42,6 +42,12 @@ else
   exit -1
 fi
 
+if [[ "${TIMER_ENABLE}" != "0"  && "${TIMER_ENABLE}" != "1" ]]
+then
+  echo "ERROR; TIMER_ENABLE=${TIMER_ENABLE} must be 0 or 1"
+  exit -1
+fi
+
 RM=`echo "${M}/68 + 1" | bc`
 RN=`echo "${N}/68 + 1" | bc`
 
@@ -64,7 +70,7 @@ module load sensei/3.0.0-vtk-shared
 
 set -x
 
-export TIMER_ENABLE=0
+echo "TIMER_ENABLE=${TIMER_ENABLE}"
 export MEMPROF_INTERVAL=0.5
 
 export TIMER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_osc_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
