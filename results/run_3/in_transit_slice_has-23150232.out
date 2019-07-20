@@ -1,0 +1,1218 @@
++ echo =============================================
+=============================================
++ echo 'PlanarSlicePartitioner                       '
+PlanarSlicePartitioner                       
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=8192
++ ./in_transit_slice_has.sh
+O=1 T=1 L=4096 M=8192 N=8192 RM= RN=257 S=./configs/slice_extract_opt_has.xml D=2019_199_14_40
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n8192_2019_199_14_40.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n8192_2019_199_14_40.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n8192_2019_199_14_40.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n8192_2019_199_14_40.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+...............................................................found at 63s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n8192_2019_199_14_40.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n8192_2019_199_14_40.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n8192_2019_199_14_40.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n8192_2019_199_14_40.mem
++ cat ./configs/slice_extract_opt_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="1"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_opt_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 406.598 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/PlanarSlicePartitioner.cxx:160][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: PlanarSlicePartitioner: NumBlocks=8192 NumActiveBlocks=830 numCellsMoved=7182255600 numCellsLeft=63705741840 movedFraction=0.101318[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=4096
++ ./in_transit_slice_has.sh
+O=1 T=1 L=4096 M=8192 N=4096 RM= RN=129 S=./configs/slice_extract_opt_has.xml D=2019_199_14_49
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n4096_2019_199_14_49.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n4096_2019_199_14_49.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n4096_2019_199_14_49.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n4096_2019_199_14_49.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+............................................................................found at 76s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n4096_2019_199_14_49.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n4096_2019_199_14_49.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n4096_2019_199_14_49.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n4096_2019_199_14_49.mem
++ cat ./configs/slice_extract_opt_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="1"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 129 -n 4096 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_opt_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 412.962 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/PlanarSlicePartitioner.cxx:160][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: PlanarSlicePartitioner: NumBlocks=8192 NumActiveBlocks=830 numCellsMoved=7182255600 numCellsLeft=63705741840 movedFraction=0.101318[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=2048
++ ./in_transit_slice_has.sh
+O=1 T=1 L=4096 M=8192 N=2048 RM= RN=65 S=./configs/slice_extract_opt_has.xml D=2019_199_14_56
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n2048_2019_199_14_56.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n2048_2019_199_14_56.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n2048_2019_199_14_56.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n2048_2019_199_14_56.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+.............................................................................found at 77s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n2048_2019_199_14_56.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n2048_2019_199_14_56.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n2048_2019_199_14_56.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n2048_2019_199_14_56.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/slice_extract_opt_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="1"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 65 -n 2048 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_opt_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 401.723 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/PlanarSlicePartitioner.cxx:160][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: PlanarSlicePartitioner: NumBlocks=8192 NumActiveBlocks=830 numCellsMoved=7182255600 numCellsLeft=63705741840 movedFraction=0.101318[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=1024
++ ./in_transit_slice_has.sh
+O=1 T=1 L=4096 M=8192 N=1024 RM= RN=33 S=./configs/slice_extract_opt_has.xml D=2019_199_15_04
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n1024_2019_199_15_04.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n1024_2019_199_15_04.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n1024_2019_199_15_04.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n1024_2019_199_15_04.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ delay=300
++ set +x
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
+.+ sed 's/.*/[31m&[0m/'
+...........................................................................found at 76s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n1024_2019_199_15_04.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n1024_2019_199_15_04.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n1024_2019_199_15_04.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n1024_2019_199_15_04.mem
++ cat ./configs/slice_extract_opt_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="1"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 33 -n 1024 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_opt_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 386.965 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/PlanarSlicePartitioner.cxx:160][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: PlanarSlicePartitioner: NumBlocks=8192 NumActiveBlocks=830 numCellsMoved=7182255600 numCellsLeft=63705741840 movedFraction=0.101318[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=512
++ ./in_transit_slice_has.sh
+O=1 T=1 L=4096 M=8192 N=512 RM= RN=17 S=./configs/slice_extract_opt_has.xml D=2019_199_15_11
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n512_2019_199_15_11.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n512_2019_199_15_11.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n512_2019_199_15_11.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n512_2019_199_15_11.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+..........................................................................found at 74s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n512_2019_199_15_11.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n512_2019_199_15_11.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n512_2019_199_15_11.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n512_2019_199_15_11.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/slice_extract_opt_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="1"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 17 -n 512 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_opt_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 384.437 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/PlanarSlicePartitioner.cxx:160][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: PlanarSlicePartitioner: NumBlocks=8192 NumActiveBlocks=830 numCellsMoved=7182255600 numCellsLeft=63705741840 movedFraction=0.101318[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=256
++ ./in_transit_slice_has.sh
+O=1 T=1 L=4096 M=8192 N=256 RM= RN=9 S=./configs/slice_extract_opt_has.xml D=2019_199_15_18
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n256_2019_199_15_18.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n256_2019_199_15_18.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n256_2019_199_15_18.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n256_2019_199_15_18.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+...........................................................................found at 75s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n256_2019_199_15_18.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n256_2019_199_15_18.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n256_2019_199_15_18.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n256_2019_199_15_18.mem
++ cat ./configs/slice_extract_opt_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="1"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 9 -n 256 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_opt_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 383.216 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/PlanarSlicePartitioner.cxx:160][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: PlanarSlicePartitioner: NumBlocks=8192 NumActiveBlocks=830 numCellsMoved=7182255600 numCellsLeft=63705741840 movedFraction=0.101318[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=1
++ T=1
++ L=4096
++ M=8192
++ N=128
++ ./in_transit_slice_has.sh
+O=1 T=1 L=4096 M=8192 N=128 RM= RN=5 S=./configs/slice_extract_opt_has.xml D=2019_199_15_24
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n128_2019_199_15_24.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n128_2019_199_15_24.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n128_2019_199_15_24.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o1_t1_l4096_m8192_n128_2019_199_15_24.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+.........................................................................found at 73s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n128_2019_199_15_24.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n128_2019_199_15_24.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n128_2019_199_15_24.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o1_t1_l4096_m8192_n128_2019_199_15_24.mem
++ cat ./configs/slice_extract_opt_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="1"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 5 -n 128 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_opt_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 382.164 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_opt_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=1 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/PlanarSlicePartitioner.cxx:160][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: PlanarSlicePartitioner: NumBlocks=8192 NumActiveBlocks=830 numCellsMoved=7182255600 numCellsLeft=63705741840 movedFraction=0.101318[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ echo '#############################################'
+#############################################
++ echo =============================================
+=============================================
++ echo 'BlockPartitioner                             '
+BlockPartitioner                             
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=8192
++ ./in_transit_slice_has.sh
+O=0 T=1 L=4096 M=8192 N=8192 RM= RN=257 S=./configs/slice_extract_has.xml D=2019_199_15_31
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n8192_2019_199_15_31.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n8192_2019_199_15_31.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n8192_2019_199_15_31.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n8192_2019_199_15_31.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ set +x
++ sed 's/.*/[31m&[0m/'
+................................................................................found at 80s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n8192_2019_199_15_31.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n8192_2019_199_15_31.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n8192_2019_199_15_31.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n8192_2019_199_15_31.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/slice_extract_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="0"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 421.716 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=4096
++ ./in_transit_slice_has.sh
+O=0 T=1 L=4096 M=8192 N=4096 RM= RN=129 S=./configs/slice_extract_has.xml D=2019_199_15_39
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n4096_2019_199_15_39.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n4096_2019_199_15_39.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n4096_2019_199_15_39.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n4096_2019_199_15_39.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ sed 's/.*/[31m&[0m/'
++ delay=300
++ set +x
+...........................................................found at 59s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n4096_2019_199_15_39.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n4096_2019_199_15_39.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n4096_2019_199_15_39.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n4096_2019_199_15_39.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/slice_extract_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="0"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 129 -n 4096 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 410.518 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=2048
++ ./in_transit_slice_has.sh
+O=0 T=1 L=4096 M=8192 N=2048 RM= RN=65 S=./configs/slice_extract_has.xml D=2019_199_15_47
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n2048_2019_199_15_47.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n2048_2019_199_15_47.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n2048_2019_199_15_47.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n2048_2019_199_15_47.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ sed 's/.*/[31m&[0m/'
++ set +x
+......................................................................found at 70s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n2048_2019_199_15_47.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n2048_2019_199_15_47.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n2048_2019_199_15_47.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n2048_2019_199_15_47.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/slice_extract_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="0"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 65 -n 2048 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 399.703 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=1024
++ ./in_transit_slice_has.sh
+O=0 T=1 L=4096 M=8192 N=1024 RM= RN=33 S=./configs/slice_extract_has.xml D=2019_199_15_56
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n1024_2019_199_15_56.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n1024_2019_199_15_56.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n1024_2019_199_15_56.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n1024_2019_199_15_56.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ delay=300
++ sed 's/.*/[31m&[0m/'
++ set +x
+.............................................................found at 61s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n1024_2019_199_15_56.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n1024_2019_199_15_56.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n1024_2019_199_15_56.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n1024_2019_199_15_56.mem
++ sed 's/.*/[36m&[0m/'
++ cat ./configs/slice_extract_has.xml
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="0"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 33 -n 1024 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 416.225 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=512
++ ./in_transit_slice_has.sh
+O=0 T=1 L=4096 M=8192 N=512 RM= RN=17 S=./configs/slice_extract_has.xml D=2019_199_16_04
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n512_2019_199_16_04.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n512_2019_199_16_04.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n512_2019_199_16_04.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n512_2019_199_16_04.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ sed 's/.*/[31m&[0m/'
++ delay=300
++ set +x
+................................................................found at 64s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n512_2019_199_16_04.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n512_2019_199_16_04.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n512_2019_199_16_04.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n512_2019_199_16_04.mem
++ cat ./configs/slice_extract_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="0"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 17 -n 512 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 435.291 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=256
++ ./in_transit_slice_has.sh
+O=0 T=1 L=4096 M=8192 N=256 RM= RN=9 S=./configs/slice_extract_has.xml D=2019_199_16_16
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n256_2019_199_16_16.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n256_2019_199_16_16.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n256_2019_199_16_16.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n256_2019_199_16_16.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ sed 's/.*/[31m&[0m/'
++ delay=300
++ set +x
+....................................................................found at 68s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n256_2019_199_16_16.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n256_2019_199_16_16.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n256_2019_199_16_16.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n256_2019_199_16_16.mem
++ cat ./configs/slice_extract_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="0"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 9 -n 256 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 521.841 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
++ O=0
++ T=1
++ L=4096
++ M=8192
++ N=128
++ ./in_transit_slice_has.sh
+O=0 T=1 L=4096 M=8192 N=128 RM= RN=5 S=./configs/slice_extract_has.xml D=2019_199_16_26
+rm: cannot remove 'data_slice_has.bp*': No such file or directory
+sensei/3.0.0-vtk-shared(3):ERROR:150: Module 'sensei/3.0.0-vtk-shared' conflicts with the currently loaded module(s) 'sensei/sVTK/8.1.1'
+sensei/3.0.0-vtk-shared(3):ERROR:102: Tcl command execution failed: conflict sensei
+
++ export TIMER_ENABLE=0
++ TIMER_ENABLE=0
++ export MEMPROF_INTERVAL=0.5
++ MEMPROF_INTERVAL=0.5
++ export TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n128_2019_199_16_26.time
++ TIMER_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n128_2019_199_16_26.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n128_2019_199_16_26.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_osc_slice_has_o0_t1_l4096_m8192_n128_2019_199_16_26.mem
++ cat ./configs/write_adios1_flexpath_slice_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="adios1" filename="data_slice_has.bp" method="FLEXPATH" enabled="1" >[0m
+[36m    <mesh name="mesh">[0m
+[36m        <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 257 -n 8192 -r 0 oscillator -t 1 -s 4096,4096,4096 -e 0,1,0,1,0,1 -b 8192 -f ./configs/write_adios1_flexpath_slice_has.xml -g 1 -p 0 ./inputs/conf.osc
++ sed 's/.*/[31m&[0m/'
++ delay=300
++ set +x
+..................................................................found at 66s
++ export TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n128_2019_199_16_26.time
++ TIMER_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n128_2019_199_16_26.time
++ export MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n128_2019_199_16_26.mem
++ MEMPROF_LOG_FILE=./logs_has/23150232_aep_slice_has_o0_t1_l4096_m8192_n128_2019_199_16_26.mem
++ cat ./configs/slice_extract_has.xml
++ sed 's/.*/[36m&[0m/'
+[36m<sensei>[0m
+[36m  <analysis type="SliceExtract" operation="planar_slice"[0m
+[36m    enable_partitioner="0"  verbose="1" enabled="1">[0m
+[36m    <mesh name="mesh">[0m
+[36m      <cell_arrays> data </cell_arrays>[0m
+[36m    </mesh>[0m
+[36m    <point> 0.5 0.5 0.5 </point>[0m
+[36m    <normal> 0.8 -0.5 0.3 </normal>[0m
+[36m    <writer mode="paraview" output_dir="./slices_has" />[0m
+[36m  </analysis>[0m
+[36m</sensei>[0m
++ srun -N 5 -n 128 -r 257 ADIOS1EndPoint -r FLEXPATH -f ./configs/slice_extract_has.xml data_slice_has.bp
++ sed 's/.*/[32m&[0m/'
+[31mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:347][v2.1.1-149-ge5ec951][0m
+[31mSTATUS: Configured ADIOSAnalysisAdaptor filename="data_slice_has.bp" method FLEXPATH max_buffer_size=0[0m
+[31mTotal run time: 770.349 s[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:74][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Opening: "data_slice_has.bp" using method "FLEXPATH"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:90][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Loading configurable analysis "./configs/slice_extract_has.xml"[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/sensei/ConfigurableAnalysis.cxx:993][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Configured SliceExtract  writer.mode=paraview writer.outputDir=./slices_has writer.writer=xml operation=planar_slice point={0.5, 0.5, 0.5} normal={0.8, -0.5, 0.3} enable_partitioner=0 verbose=1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 0 time 0[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 1 time 1[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 2 time 2[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 3 time 3[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 4 time 4[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 5 time 5[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 6 time 6[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 7 time 7[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 8 time 8[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:112][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Processing time step 9 time 9[0m
+[32mSTATUS: [0][/usr/common/software/sensei/sensei/build/sensei-3.0.0/endpoints/ADIOS1EndPoint.cpp:131][v2.1.1-149-ge5ec951][0m
+[32mSTATUS: Finished processing 10 time steps[0m
++ echo =============================================
+=============================================
