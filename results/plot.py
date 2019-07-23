@@ -42,7 +42,7 @@ for line in f:
   maxread.append(float(scanf('%fM',dat[6])[0]))
   avewrite.append(float(scanf('%fM',dat[7])[0]))
   maxwrite.append(float(scanf('%fM',dat[8])[0]))
-  averss.append(float(dat[9]))
+  #averss.append(float(dat[9]))
   maxrss.append(float(scanf('%fK',dat[10])[0]))
 
 opt = np.array(opt)
@@ -67,11 +67,11 @@ nopt_jj = np.where((opt == 0)  & (jnam == 'ADIOS1EndPoint'))[0]
 
 
 
-fig = plt.figure(figsize=(10,3.25))
+fig = plt.figure(figsize=(10,2.9))
 plt.subplot(1,4,1)
 
-plt.loglog(ncpu[opt_jj], elapr[opt_ii], 'r-', linewidth=2)
-plt.loglog(ncpu[nopt_jj], elapr[nopt_ii], 'b--', linewidth=2)
+plt.semilogx(ncpu[opt_jj], elapr[opt_ii], 'r-', marker='.', linewidth=2)
+plt.semilogx(ncpu[nopt_jj], elapr[nopt_ii], 'b--', marker='.', linewidth=2)
 plt.grid(True, which='both')
 #plt.grid(which='minor', linestyle=':')
 
@@ -87,13 +87,13 @@ plt.ylabel('Time to solution (sec)', fontweight='bold')
 #fig = plt.figure()
 plt.subplot(1,4,2)
 
-plt.semilogx(ncpu[opt_jj], elapr[opt_ii]*(ncpu[opt_ii] + ncpu[opt_jj])/3600., 'r-', linewidth=2)
-plt.semilogx(ncpu[nopt_jj], elapr[nopt_ii]*(ncpu[nopt_ii] + ncpu[nopt_jj])/3600., 'b--', linewidth=2)
+plt.semilogx(ncpu[opt_jj], elapr[opt_ii]*(ncpu[opt_ii] + ncpu[opt_jj])/3600., 'r-', marker='.' , linewidth=2)
+plt.semilogx(ncpu[nopt_jj], elapr[nopt_ii]*(ncpu[nopt_ii] + ncpu[nopt_jj])/3600., 'b--', marker='.', linewidth=2)
 plt.grid(True, which='both')
 
 #plt.title('Iso-surface Haswell L=4096 M=8192')
 plt.xlabel('NCPU End-point', fontweight='bold')
-plt.ylabel('Cost (CPU Hours)', fontweight='bold')
+plt.ylabel('Total cost (CPU Hours)', fontweight='bold')
 
 #fm  = pylab.get_current_fig_manager()
 #fm.window.wm_geometry("+500+0")
@@ -106,9 +106,9 @@ plt.ylabel('Cost (CPU Hours)', fontweight='bold')
 plt.subplot(1,4,3)
 
 #plt.loglog(ncpu[opt_jj], averead[opt_jj], 'r.', linewidth=2)
-plt.loglog(ncpu[opt_jj], maxread[opt_jj], 'r-', linewidth=2)
+plt.loglog(ncpu[opt_jj], maxread[opt_jj], 'r-', marker='.', linewidth=2)
 #plt.loglog(ncpu[nopt_jj], averead[nopt_jj], 'b-.', linewidth=2)
-plt.loglog(ncpu[nopt_jj], maxread[nopt_jj], 'b--', linewidth=2)
+plt.loglog(ncpu[nopt_jj], maxread[nopt_jj], 'b--', marker='.', linewidth=2)
 plt.grid(True, which='both')
 
 #plt.title('Iso-surface Haswell L=4096 M=8192')
@@ -143,19 +143,19 @@ plt.ylabel('Max Read (MB) End-point', fontweight='bold')
 #fig = plt.figure()
 plt.subplot(1,4,4)
 
-plt.loglog(ncpu[opt_jj], maxrss[opt_jj], 'r-', linewidth=2)
-plt.loglog(ncpu[nopt_jj], maxrss[nopt_jj], 'b--', linewidth=2)
+plt.loglog(ncpu[opt_jj], maxrss[opt_jj], 'r-', marker='.', linewidth=2)
+plt.loglog(ncpu[nopt_jj], maxrss[nopt_jj], 'b--', marker='.', linewidth=2)
 plt.grid(True, which='both')
 
 #plt.title('Iso-surface Haswell L=4096 M=8192')
 plt.xlabel('NCPU End-point', fontweight='bold')
-plt.ylabel('Max RSS End-point (KB)', fontweight='bold')
+plt.ylabel('Max RSS (KB) End-point', fontweight='bold')
 
 plt.legend(['opt. part','default']) #,loc='upper left', bbox_to_anchor=(1,1))
 
 
 plt.suptitle(title, fontweight='bold')
-plt.subplots_adjust(left=0.1, right=0.95, wspace=0.55, bottom=0.15)
+plt.subplots_adjust(left=0.08, right=0.98, wspace=0.55, bottom=0.18)
 
 plt.savefig(fno, dpi=200)
 
