@@ -62,7 +62,9 @@ blu=`echo -e '\e[36m'`
 wht=`echo -e '\e[0m'`
 
 #rm -rf ./slices_knl/*
-find ./slices_knl/ -exec rm {} \;
+#find ./slices_knl/ -exec rm {} \;
+rm -rf ./slices_knl
+mkdir ./slices_knl
 rm data_slice_knl.bp*
 
 module use /usr/common/software/sensei/modulefiles
