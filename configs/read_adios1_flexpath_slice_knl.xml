@@ -1,0 +1,4 @@
+<sensei>
+  <transport type="adios1" filename="data_slice_knl.bp" method="FLEXPATH" enabled="1" />
+</sensei>
+

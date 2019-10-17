@@ -42,9 +42,9 @@ else
   exit -1
 fi
 
-if [[ "${TIMER_ENABLE}" != "0"  && "${TIMER_ENABLE}" != "1" ]]
+if [[ "${PROFILER_ENABLE}" != "0"  && "${PROFILER_ENABLE}" != "3" ]]
 then
-  echo "ERROR; TIMER_ENABLE=${TIMER_ENABLE} must be 0 or 1"
+  echo "ERROR; PROFILER_ENABLE=${PROFILER_ENABLE} must be 0 or 3"
   exit -1
 fi
 
@@ -72,10 +72,10 @@ module load sensei/3.0.0-vtk-shared
 
 set -x
 
-echo "TIMER_ENABLE=${TIMER_ENABLE}"
+echo "PROFILER_ENABLE=${PROFILER_ENABLE}"
 export MEMPROF_INTERVAL=0.5
 
-export TIMER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_osc_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
+export PROFILER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_osc_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
 export MEMPROF_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_osc_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
 
 cat ./configs/write_adios1_flexpath_slice_knl.xml | sed "s/.*/$blu&$wht/"
@@ -108,11 +108,13 @@ echo "found at ${delay}s"
 set -x
 
 
-export TIMER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_aep_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
+export PROFILER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_aep_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
 export MEMPROF_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_aep_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
 
 cat ${S} | sed "s/.*/$blu&$wht/"
+cat ./configs/read_adios1_flexpath_slice_knl.xml | sed "s/.*/$blu&$wht/"
 
-srun -N ${RN} -n ${N} -r ${RM} ADIOS1EndPoint -r FLEXPATH \
-  -f ${S} data_slice_knl.bp 2>&1 | sed "s/.*/$grn&$wht/"
+srun -N ${RN} -n ${N} -r ${RM} SENSEIEndPoint \
+  -t ./configs/read_adios1_flexpath_slice_knl.xml \
+  -a ${S} 2>&1 | sed "s/.*/$grn&$wht/"
 

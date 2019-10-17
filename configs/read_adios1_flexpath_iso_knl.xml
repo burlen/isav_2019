@@ -1,0 +1,3 @@
+<sensei>
+  <transport type="adios1" filename="data_iso_knl.bp" method="FLEXPATH" enabled="1" />
+</sensei>

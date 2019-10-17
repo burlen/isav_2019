@@ -63,10 +63,10 @@ module load sensei/3.0.0-vtk-shared
 
 set -x
 
-export TIMER_ENABLE=0
+export PROFILER_ENABLE=0
 export MEMPROF_INTERVAL=0.5
 
-export TIMER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_osc_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
+export PROFILER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_osc_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
 export MEMPROF_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_osc_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
 
 cat ./configs/write_adios1_flexpath_slice_vis_knl.xml | sed "s/.*/$blu&$wht/"
@@ -99,11 +99,13 @@ echo "found at ${delay}s"
 set -x
 
 
-export TIMER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_aep_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
+export PROFILER_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_aep_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.time
 export MEMPROF_LOG_FILE=./logs_knl/${SLURM_JOB_ID}_aep_slice_knl_o${O}_t${T}_l${L}_m${M}_n${N}_${D}.mem
 
 cat ${S} | sed "s/.*/$blu&$wht/"
+cat ./configs/read_adios1_flexpath_slice_vis_knl.xml | sed "s/.*/$blu&$wht/"
 
-srun -N ${RN} -n ${N} -r ${RM} ADIOS1EndPoint -r FLEXPATH \
-  -f ${S} data_slice_vis_knl.bp 2>&1 | sed "s/.*/$grn&$wht/"
+srun -N ${RN} -n ${N} -r ${RM} SENSEIEndPoint \
+  -t ./configs/read_adios1_flexpath_slice_vis_knl.xml \
+  -a ${S} 2>&1 | sed "s/.*/$grn&$wht/"
 
