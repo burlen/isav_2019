@@ -61,9 +61,9 @@ grn=`echo -e '\e[32m'`
 blu=`echo -e '\e[36m'`
 wht=`echo -e '\e[0m'`
 
-#rm -rf ./isos_knl/*
-find ./isos_knl/ -exec rm {} \;
-rm data_iso_knl.bp*
+rm -f data_iso_knl.bp*
+rm -rf ./isos_knl
+mkdir ./isos_knl
 
 module use /usr/common/software/sensei/modulefiles
 module load sensei/3.0.0-vtk-shared

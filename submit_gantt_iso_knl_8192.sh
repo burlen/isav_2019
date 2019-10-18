@@ -2,7 +2,7 @@
 #SBATCH -N 123
 #SBATCH -C knl
 #SBATCH -t 01:00:00
-#SBATCH -q premium
+#SBATCH -q regular
 #SBATCH -A m2956
 #SBATCH -J in_transit_gantt_iso_knl
 #SBATCH -d singleton

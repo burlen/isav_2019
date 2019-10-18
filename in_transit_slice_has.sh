@@ -61,10 +61,9 @@ grn=`echo -e '\e[32m'`
 blu=`echo -e '\e[36m'`
 wht=`echo -e '\e[0m'`
 
+rm -f data_slice_has.bp*
 rm -rf ./slices_has
 mkdir ./slices_has
-#find ./slices_has/ -exec rm {} \;
-rm data_slice_has.bp*
 
 module use /usr/common/software/sensei/modulefiles
 module load sensei/3.0.0-vtk-shared

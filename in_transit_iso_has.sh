@@ -61,9 +61,9 @@ grn=`echo -e '\e[32m'`
 blu=`echo -e '\e[36m'`
 wht=`echo -e '\e[0m'`
 
-#rm -rf ./isos_has/*
-find ./isos_has/ -exec rm {} \;
 rm data_iso_has.bp*
+rm -rf ./isos_has
+mkdir ./isos_has
 
 module use /usr/common/software/sensei/modulefiles
 module load sensei/3.0.0-vtk-shared
