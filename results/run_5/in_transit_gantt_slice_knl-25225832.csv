@@ -1,0 +1,9 @@
+# sacct -o JobName%30,NCPUS,Elapsed,ElapsedRaw,AveDiskRead,MaxDiskRead,MaxDiskReadTask,MaxDiskReadNode,AveDiskWrite,MaxDiskWrite,MaxDiskWriteTask,MaxDiskWriteNode,AveRSS,MaxRSS,MaxRSSTask,MaxRSSNode -j 25225832
+# in_transit_gantt_slice_knl, 33456, 00:16:54, 1014
+# batch, 272, 00:16:54, 1014, 8.41M, 8.41M, 0, nid03466, 0.18M, 0.18M, 0, nid03466, 27652K, 27652K, 0, nid03466
+# extern, 33456, 00:17:30, 1050, 0.00M, 0.00M, 119, nid12663, 0, 0, 119, nid12663, 113247, 318K, 73, nid10364
+JobName, NCPUS, Elapsed, ElapsedRaw, AveDiskRead, MaxDiskRead, MaxDiskReadTask, MaxDiskReadNode, AveDiskWrite, MaxDiskWrite, MaxDiskWriteTask, MaxDiskWriteNode, AveRSS, MaxRSS, MaxRSSTask, MaxRSSNode
+oscillator, 8192, 00:05:05, 305, 1.14M, 3.38M, 3060, nid09048, 25.37M, 313.22M, 110, nid03467, 94552864, 105003K, 612, nid04954
+SENSEIEndPoint, 128, 00:04:18, 258, 1650.05M, 1778.67M, 0, nid12666, 57.54M, 81.25M, 59, nid12666, 92117720, 99043K, 1, nid12666
+oscillator, 8192, 00:11:41, 701, 2.08M, 3.61M, 2448, nid08390, 245.18M, 313.50M, 0, nid03466, 87342580, 93464K, 544, nid04953
+SENSEIEndPoint, 128, 00:10:41, 641, 15685.56M, 15689.17M, 64, nid12667, 59.39M, 66.07M, 0, nid12666, 445612680, 439200K, 101, nid12667
